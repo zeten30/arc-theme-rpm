@@ -8,7 +8,7 @@ clean:
 	rm -rf ./*.tar.xz
 
 sources: clean
-	curl https://github.com/jnsh/arc-theme/releases/download/$(VERSION)/arc-theme-$(VERSION).tar.xz -o ./arc-theme-$(VERSION).tar.xz
+	wget https://github.com/jnsh/arc-theme/releases/download/$(VERSION)/arc-theme-$(VERSION).tar.xz
 
 srpm: sources
 	mock -r fedora-$(FEDORA_RELEASE)-x86_64 --spec arc-theme.spec --sources ./ --resultdir ./ --buildsrpm
@@ -17,4 +17,4 @@ rpm: srpm
 	mock -r fedora-$(FEDORA_RELEASE)-x86_64 --rebuild arc-*.src.rpm --resultdir ./
 
 copr: srpm 
-	copr-cli build mzink/Utils rpmbuild/arc-*.src.rpm --nowait -r fedora-$(FEDORA_RELEASE)-x86_64 -r fedora-rawhide-x86_64
+	copr-cli build mzink/Utils arc-*.src.rpm --nowait -r fedora-$(FEDORA_RELEASE)-x86_64 -r fedora-rawhide-x86_64

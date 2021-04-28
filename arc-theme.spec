@@ -3,9 +3,12 @@ Arc is a flat theme with transparent elements for GTK 3, GTK 2 and \
 Gnome-Shell which supports GTK 3 and GTK 2 based desktop environments \
 like Gnome, Cinnamon, Budgie, Pantheon, XFCE, Mate, etc.
 
+%global meson_build_options -Dthemes=gnome-shell,gtk2,gtk3,metacity,plank,xfwm -Dgnome_shell_version=40 -Dtransparency=false
+
+
 Name: arc-theme
 Version: 20210412
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Flat theme with transparent elements (git master snapshot)
 
 License: GPLv3+
@@ -36,7 +39,7 @@ Requires: gtk-murrine-engine
 %autosetup
 
 %build
-%meson -Dthemes=gnome-shell,gtk2,gtk3,metacity,plank,xfwm -Dgnome_shell_version=40
+%meson %{meson_build_options}
 %meson_build
 
 %install
